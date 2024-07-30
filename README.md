@@ -3,7 +3,6 @@ Overview of Llama for LLMs
 
 Here is a timeline showing the development of important large language models (LLMs):
 
-
 - **GPT-1 (2018)**
 - **GPT-2 (2019)**
 - **GPT-3 (2020)**
@@ -12,8 +11,6 @@ Here is a timeline showing the development of important large language models (L
 - **LLaMA 1 (2023 Feb)**
 - **LLaMA 2 (2023 July)**
 - **LLaMA 3 (2024 July)**
-
-![Timeline of LLMs](sandbox:/mnt/data/A_timeline_showing_the_development_of_important_la.png)
 
 For GPT Series, please refer to https://github.com/LiliMeng/LLMs/blob/main/README.md
 
