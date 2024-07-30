@@ -10,3 +10,114 @@ Overview of Llama for LLMs
 ### Reward Modeling
 The model architecture and hyper-parameters are identical to those of the pretrained language models, except that the classification head for next-token prediction is replaced with a regression head for outputing a scalar reward.
 <img width="1339" alt="Screenshot 2024-07-29 at 5 25 08 PM" src="https://github.com/user-attachments/assets/7500897a-f1cf-4f94-a2f8-49f38c3a0c72">
+
+### Proximal Policy Optimization (PPO)
+
+Proximal Policy Optimization (PPO) is a reinforcement learning algorithm that aims to improve the training of policies by optimizing a surrogate objective function. It addresses some of the challenges found in other policy optimization methods, such as the complexity and instability of training. PPO is known for its simplicity and effectiveness, making it one of the most popular algorithms in the field of reinforcement learning.
+
+Here’s a detailed explanation of PPO:
+
+### Key Concepts
+
+1. **Policy**:
+   - A policy defines the behavior of an agent by mapping states of the environment to actions. In reinforcement learning, the policy is often represented as a neural network that outputs a probability distribution over actions given a state.
+
+2. **Objective Function**:
+   - PPO optimizes a surrogate objective function to improve the policy. The goal is to maximize the expected reward by adjusting the policy parameters.
+
+3. **Clipped Surrogate Objective**:
+   <img width="684" alt="Screenshot 2024-07-30 at 10 24 31 AM" src="https://github.com/user-attachments/assets/4cac8b4b-b143-41ce-b658-52167b0ba104">
+
+
+4. **Advantage Function**:
+   - The advantage function \(\hat{A}_t\) is used to estimate the relative value of an action compared to the average action at a given state. It helps in deciding which actions are better than the average.
+
+5. **Trust Region**:
+   - By clipping the objective, PPO ensures that the new policy does not deviate too much from the old policy. This creates a "trust region" that helps maintain stable updates.
+
+### Algorithm
+
+1. **Initialize**:
+   - Start with an initial policy \(\pi_{\theta_{\text{old}}}\) with parameters \(\theta_{\text{old}}\).
+
+2. **Collect Data**:
+   - Interact with the environment using the current policy to collect trajectories (states, actions, rewards).
+
+3. **Compute Advantage Estimates**:
+   - Use the collected data to compute the advantage estimates \(\hat{A}_t\) for each time step \(t\).
+
+4. **Update Policy**:
+   - Optimize the policy by maximizing the clipped surrogate objective \(L^{CLIP}\). Update the policy parameters \(\theta\) using gradient ascent.
+
+5. **Repeat**:
+   - Repeat the process by collecting new data with the updated policy and iterating through the optimization steps.
+
+### Advantages of PPO
+
+1. **Stability and Reliability**:
+   - The clipping mechanism prevents large updates, ensuring stable learning and avoiding performance collapse.
+
+2. **Simplicity**:
+   - PPO is relatively simple to implement compared to other advanced policy optimization methods like Trust Region Policy Optimization (TRPO).
+
+3. **Sample Efficiency**:
+   - PPO can be more sample-efficient due to its ability to reuse data for multiple epochs of optimization.
+
+### Applications
+
+PPO is widely used in various applications of reinforcement learning, including:
+- Robotics: Training robots for tasks like manipulation, navigation, and locomotion.
+- Game Playing: Developing agents to play complex games like Dota 2, chess, and Go.
+- Autonomous Vehicles: Training policies for self-driving cars to navigate safely.
+
+### Example
+
+Here’s a simplified code snippet to give an idea of how PPO might be implemented:
+
+```python
+import torch
+import torch.nn as nn
+import torch.optim as optim
+
+class PolicyNetwork(nn.Module):
+    def __init__(self, state_dim, action_dim):
+        super(PolicyNetwork, self).__init__()
+        self.fc = nn.Sequential(
+            nn.Linear(state_dim, 128),
+            nn.ReLU(),
+            nn.Linear(128, action_dim),
+            nn.Softmax(dim=-1)
+        )
+    
+    def forward(self, x):
+        return self.fc(x)
+
+def ppo_update(policy, optimizer, trajectories, clip_epsilon=0.2, epochs=10):
+    for _ in range(epochs):
+        for state, action, old_log_prob, advantage in trajectories:
+            new_log_prob = policy(state).log_prob(action)
+            ratio = torch.exp(new_log_prob - old_log_prob)
+            surr1 = ratio * advantage
+            surr2 = torch.clamp(ratio, 1 - clip_epsilon, 1 + clip_epsilon) * advantage
+            loss = -torch.min(surr1, surr2).mean()
+            
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+
+# Example usage
+state_dim = 4
+action_dim = 2
+policy = PolicyNetwork(state_dim, action_dim)
+optimizer = optim.Adam(policy.parameters(), lr=0.01)
+
+# Assuming `trajectories` is a list of (state, action, old_log_prob, advantage) tuples
+trajectories = [...]
+ppo_update(policy, optimizer, trajectories)
+```
+
+In this snippet:
+- A simple policy network is defined.
+- The `ppo_update` function performs the PPO update using the clipped objective.
+
+PPO is a powerful algorithm that balances simplicity and performance, making it a go-to choice for many reinforcement learning tasks.
