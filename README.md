@@ -8,7 +8,7 @@ For GPT Series, please refer to https://github.com/LiliMeng/LLMs/blob/main/READM
 
 Google Colba example LLAMA Superviesed fine tuning [link](https://colab.research.google.com/drive/1PEQyJO1-f6j0S_XJ8DV50NkpzasXkrzd?usp=sharing#scrollTo=x-xPb-_qB0dz)
 
-Google Colab example on RLHF [link1 from UC Bekeley homework, some cannot run](https://colab.research.google.com/drive/1NqsWBgl7rJsYhP1AsmBgGwVYj-6_Pp1P) [link2 some cannot run](https://colab.research.google.com/github/heartexlabs/RLHF/blob/master/tutorials/RLHF_with_Custom_Datasets.ipynb) [Fine-tuning and evaluating GPT-3.5 with human feedback for RAG](https://colab.research.google.com/github/argilla-io/argilla/blob/main/docs/_source/tutorials_and_integrations/tutorials/feedback/fine-tuning-openai-rag-feedback.ipynb)
+Google Colab example on RLHF ([link1 from UC Bekeley homework, some cannot run](https://colab.research.google.com/drive/1NqsWBgl7rJsYhP1AsmBgGwVYj-6_Pp1P)) ([link2 some cannot run](https://colab.research.google.com/github/heartexlabs/RLHF/blob/master/tutorials/RLHF_with_Custom_Datasets.ipynb))([Fine-tuning and evaluating GPT-3.5 with human feedback for RAG](https://colab.research.google.com/github/argilla-io/argilla/blob/main/docs/_source/tutorials_and_integrations/tutorials/feedback/fine-tuning-openai-rag-feedback.ipynb))
 
 #### LLaMA 2:
 - **General-Purpose Model**: Designed for a wide range of natural language processing tasks such as text generation, summarization, translation, and more.
