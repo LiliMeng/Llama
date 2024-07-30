@@ -68,23 +68,8 @@ Here’s a detailed explanation of PPO:
 
 5. **Trust Region**:
    - By clipping the objective, PPO ensures that the new policy does not deviate too much from the old policy. This creates a "trust region" that helps maintain stable updates.
+<img width="718" alt="Screenshot 2024-07-30 at 11 11 23 AM" src="https://github.com/user-attachments/assets/b69fbf50-d2b3-42ea-be72-6bce69a8ee49">
 
-### Algorithm
-
-1. **Initialize**:
-   - Start with an initial policy \(\pi_{\theta_{\text{old}}}\) with parameters \(\theta_{\text{old}}\).
-
-2. **Collect Data**:
-   - Interact with the environment using the current policy to collect trajectories (states, actions, rewards).
-
-3. **Compute Advantage Estimates**:
-   - Use the collected data to compute the advantage estimates \(\hat{A}_t\) for each time step \(t\).
-
-4. **Update Policy**:
-   - Optimize the policy by maximizing the clipped surrogate objective \(L^{CLIP}\). Update the policy parameters \(\theta\) using gradient ascent.
-
-5. **Repeat**:
-   - Repeat the process by collecting new data with the updated policy and iterating through the optimization steps.
 
 ### Advantages of PPO
 
@@ -155,3 +140,73 @@ In this snippet:
 - The `ppo_update` function performs the PPO update using the clipped objective.
 
 PPO is a powerful algorithm that balances simplicity and performance, making it a go-to choice for many reinforcement learning tasks.
+
+### Rejection Sampling fine-tuning
+Rejection Sampling fine-tuning in Reinforcement Learning with Human Feedback (RLHF) is a technique to enhance model training by leveraging human judgments to select high-quality outputs. Here's a step-by-step explanation:
+
+1. **Generate Outputs**: The model generates multiple outputs for a given input.
+2. **Human Evaluation**: Human evaluators rank these outputs based on quality, relevance, and appropriateness.
+3. **Select Best Outputs**: The highest-ranked outputs are accepted, while lower-ranked outputs are rejected.
+4. **Update Model**: The accepted outputs are used to fine-tune the model, reinforcing desirable behaviors and improving overall performance.
+
+This process ensures that the model learns from high-quality examples, aligning its behavior with human preferences.
+
+### Example Code
+
+```python
+import random
+
+class SimpleModel:
+    def __init__(self):
+        self.parameters = {"weight": 1.0}
+
+    def generate_output(self, input_data):
+        # Simple linear model for demonstration
+        return self.parameters["weight"] * input_data
+
+    def update_parameters(self, accepted_samples):
+        # Update parameters based on accepted samples
+        total = sum(accepted_samples)
+        self.parameters["weight"] = total / len(accepted_samples)
+
+def generate_samples(model, input_data, num_samples=10):
+    samples = []
+    for _ in range(num_samples):
+        output = model.generate_output(input_data)
+        samples.append(output + random.uniform(-1, 1))  # Add some noise
+    return samples
+
+def evaluate_samples(samples):
+    # Simulate human evaluation with random scores
+    scores = [random.uniform(0, 1) for _ in samples]
+    ranked_samples = sorted(zip(samples, scores), key=lambda x: x[1], reverse=True)
+    return ranked_samples
+
+def rejection_sampling_fine_tuning(model, input_data, num_samples=10, acceptance_ratio=0.3):
+    samples = generate_samples(model, input_data, num_samples)
+    ranked_samples = evaluate_samples(samples)
+    
+    # Select top N% of samples
+    num_accepted = int(acceptance_ratio * num_samples)
+    accepted_samples = [sample for sample, score in ranked_samples[:num_accepted]]
+    
+    # Update the model with accepted samples
+    model.update_parameters(accepted_samples)
+    return model
+
+# Example usage
+model = SimpleModel()
+input_data = 5.0  # Example input
+model = rejection_sampling_fine_tuning(model, input_data)
+
+print(f"Updated model parameters: {model.parameters}")
+```
+
+### Explanation
+
+1. **SimpleModel**: A basic model that generates outputs based on input data.
+2. **generate_samples**: Generates multiple noisy outputs for a given input.
+3. **evaluate_samples**: Simulates human evaluation by assigning random scores and ranking the samples.
+4. **rejection_sampling_fine_tuning**: Uses the top-ranked samples to fine-tune the model.
+
+This code provides a basic framework for rejection sampling fine-tuning, demonstrating how to incorporate human feedback into model training. In a real-world scenario, the evaluation would be done by actual human annotators, and the model would be more complex.
