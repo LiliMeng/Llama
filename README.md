@@ -7,3 +7,4 @@ Overview of Llama for LLMs
 
 ### Reward Modeling
 The model architecture and hyper-parameters are identical to those of the pretrained language models, except that the classification head for next-token prediction is replaced with a regression head for outputing a scalar reward.
+<img width="1339" alt="Screenshot 2024-07-29 at 5 25 08 PM" src="https://github.com/user-attachments/assets/7500897a-f1cf-4f94-a2f8-49f38c3a0c72">
