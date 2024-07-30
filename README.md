@@ -45,7 +45,9 @@ Two main methds:
 **Proximal Policy Optimization (PPO)**
 
 **Rejection Sampling fine-tuning**
+Rejection sampling is only with largest 70B LLAMA 2-Chat. All smaller models are fine-tuned on rejection sampled data from the larger model, thus distilling the large-model capabilities into the smaller ones.
 
+Until RLHF(V4), only Rejection Sampling fine-tuning is used, after that, we combined the two sequentially, applying PPO on top of the resulted Rejection Sampling checkpoint before sampling again.
 
 ### Proximal Policy Optimization (PPO)
 
