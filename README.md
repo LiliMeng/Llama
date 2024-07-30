@@ -1,10 +1,14 @@
 # Llama
 Overview of Llama for LLMs
 
+For GPT Series, please refer to https://github.com/LiliMeng/LLMs/blob/main/README.md
+
 ## Llama 2: Open Foundation and Fine-Tuned Chat Models
 [Paper](https://scontent.fyvr1-1.fna.fbcdn.net/v/t39.2365-6/10000000_662098952474184_2584067087619170692_n.pdf?_nc_cat=105&ccb=1-7&_nc_sid=3c67a6&_nc_ohc=gz4k9p3GxPgQ7kNvgGOjnLZ&_nc_ht=scontent.fyvr1-1.fna&oh=00_AYDtURHKq7Q8GC8LG8JkNTn7SMsPEgETbbeQ-GfakkFd8Q&oe=66ADAA7F)
 
-Google Colab example on RLHF [link1](https://colab.research.google.com/drive/1NqsWBgl7rJsYhP1AsmBgGwVYj-6_Pp1P) [link2](https://colab.research.google.com/github/heartexlabs/RLHF/blob/master/tutorials/RLHF_with_Custom_Datasets.ipynb) [Fine-tuning and evaluating GPT-3.5 with human feedback for RAG](https://colab.research.google.com/github/argilla-io/argilla/blob/main/docs/_source/tutorials_and_integrations/tutorials/feedback/fine-tuning-openai-rag-feedback.ipynb)
+Google Colba example LLAMA Superviesed fine tuning [link](https://colab.research.google.com/drive/1PEQyJO1-f6j0S_XJ8DV50NkpzasXkrzd?usp=sharing#scrollTo=x-xPb-_qB0dz)
+
+Google Colab example on RLHF [link1 from UC Bekeley homework, some cannot run](https://colab.research.google.com/drive/1NqsWBgl7rJsYhP1AsmBgGwVYj-6_Pp1P) [link2 some cannot run](https://colab.research.google.com/github/heartexlabs/RLHF/blob/master/tutorials/RLHF_with_Custom_Datasets.ipynb) [Fine-tuning and evaluating GPT-3.5 with human feedback for RAG](https://colab.research.google.com/github/argilla-io/argilla/blob/main/docs/_source/tutorials_and_integrations/tutorials/feedback/fine-tuning-openai-rag-feedback.ipynb)
 
 #### LLaMA 2:
 - **General-Purpose Model**: Designed for a wide range of natural language processing tasks such as text generation, summarization, translation, and more.
