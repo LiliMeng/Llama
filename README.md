@@ -3,11 +3,22 @@ Overview of Llama for LLMs
 
 Here is a timeline showing the development of important large language models (LLMs):
 
-- **GPT-1 (2018)**
-- **GPT-2 (2019)**
-- **GPT-3 (2020)**
-- **ChatGPT (InstructGPT) (2022)**
-- **GPT-4 (2023)**
+1. **GPT-1**
+   [Improving Language Understanding by Generative Pre-Training](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf): June 2018
+   
+2. **GPT-2**
+   [Language Models are Few-Shot Learners](https://openai.com/blog/better-language-models/): February 2019
+   
+3. **GPT-3**
+   "Language Models are Few-Shot Learners" [GPT-3](https://arxiv.org/abs/2005.14165) June 2020
+   
+
+4. **ChatGPT** (based on GPT-3.5) [ChatGPT: Optimizing Language Models for Dialogue](https://openai.com/research/chatgpt) November 2022
+   
+5. **GPT-4** [Introducing GPT-4](https://openai.com/research/gpt-4) March 2023
+  
+
+6. **LLaMA 1, LLaMA 2, LLaMA 3**
 - **LLaMA 1 (2023 Feb)**
 - **LLaMA 2 (2023 July)**
 - **LLaMA 3 (2024 July)**
