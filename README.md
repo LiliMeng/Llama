@@ -7,9 +7,33 @@ Overview of Llama for LLMs
 ### Training
 <img width="1337" alt="Screenshot 2024-07-30 at 9 53 00 AM" src="https://github.com/user-attachments/assets/e984ed06-5017-4aae-99b9-6af8c12e4759">
 
-### Reward Modeling
+### 3.1 Supervised Fine-tuning (SFT)
+To ensure the model sequence length is properly filled, we concatenate all the prompts and answers from the training set. A special token is utilized to separate the prompt and answer segments. We use
+autoregressive objective and zero-out the loss on tokends from the user prompt, as a result, only backpropage answer tokens. Fine-tune the model for 2 epochs.
+
+### 3.2 Reinforcement Learning with Human Feedback (RLHF)
+RLHF is a model training procedure that is applied to a fine-tuned language model to further align model behavior with human preferences and instruction following. We collect data that represents empirically
+sampled human preferences, whereby human annotators select which of two model ouputs they prefer. This human feedback is subsequently used to train a reward model, which learns patterns in the preferences of the
+human annotators and cna then automate preference decisions.
+
+#### 3.2.1 Human Preference Data Collection
+
+#### 3.2.2 Reward Modeling
+The reward model takes a model response and its corresponding prompt (including contexts from previous turns) as inputs and outputs a scalar score to indicate the quality (e.g. helpfulness and safety) of the model generation. Leveraging such response scores as rewards, we can optimize LLAMA2-Chat during RLHF for better human preference alignment and improved helpfulness and safety.
+
 The model architecture and hyper-parameters are identical to those of the pretrained language models, except that the classification head for next-token prediction is replaced with a regression head for outputing a scalar reward.
 <img width="1339" alt="Screenshot 2024-07-29 at 5 25 08 PM" src="https://github.com/user-attachments/assets/7500897a-f1cf-4f94-a2f8-49f38c3a0c72">
+
+#### 3.2.3 Iterative Fine-tuning
+As we received more batches of human preference data annotation, we were able to train better reward models and collect more prompts. We therefore trained successive versions for RLHF models, referred to RLHF-V1,
+...,RLHF-V5.
+
+Two main methds:
+
+**Proximal Policy Optimization (PPO)**
+
+**Rejection Sampling fine-tuning**
+
 
 ### Proximal Policy Optimization (PPO)
 
