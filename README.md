@@ -243,4 +243,12 @@ This code provides a basic framework for rejection sampling fine-tuning, demonst
 
 ## The Llama 3 Herd of Models
 [Paper](https://scontent.fyvr1-1.fna.fbcdn.net/v/t39.2365-6/452387774_1036916434819166_4173978747091533306_n.pdf?_nc_cat=104&ccb=1-7&_nc_sid=3c67a6&_nc_ohc=DTS7hDTcxZoQ7kNvgGa2Q8D&_nc_ht=scontent.fyvr1-1.fna&gid=Alq3bgijlK6y7Ed9LYFJBNZ&oh=00_AYAPD1I37SucEQSalgQevVvcfqKSjqJQAJYnJIVxAJiF8g&oe=66B0260D)
-
+### Three key levers in the development of high-quality foundation models:
+1. **Data**:
+   Compared to prior versions of Llama, both quantity and quality of the data used for pre-training and post-training are improved. Include: the development of more careful pre-processing and curation
+   pipelines for pre-training and more rigorous quality assurance and filtering approaches for post-training data. We pre-train Llama 3 on 15T multilingual tokens, compared to 1.8T tokens for Llama2.
+2. **Scale**:
+   We train a model at far larger scale than previous Llama models: our flagship language model was pre-trained using 3.8x10^25 FLOPs, almost 50X more than largest version of Llama2. Pre-train a flagship
+   model with 405B params on 15.6T tokens. As scaling laws for foundation models, the flagship model outperforms smaller models trained using the same procedure.
+3. **Managing complexity**:
+   We make design choices that seek to maximize the ability to scale the model development process. Use a standard dense Transformer with minor adaptations, rather than a mixture-of-experts to maximize training      stability. Post-training procedure based on supervised fine-tuning (SFT), rejection sampling (RS), and direct preference optimization (DPO) as opposed to more complex reinforcement learning alogrithms that tend    to be less stabel and harder to scale.
